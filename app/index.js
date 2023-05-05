@@ -1,8 +1,11 @@
 import React from "react";
 import { Text, SafeAreaView, ScrollView, View } from "react-native";
 import { Stack } from "expo-router";
-import ScreenHeaderBtn from "../components/Avatar";
+import Avatar from "../components/Avatar";
 import Categories from "../components/Categories";
+import Tasks from "../components/Tasks";
+import Welcome from "../components/Welcome";
+import AddTaskButton from "../components/AddTaskButton";
 
 export default function Home() {
   return (
@@ -14,11 +17,14 @@ export default function Home() {
           headerLeft: () => <Avatar />,
         }}
       />
-      <ScrollView>
-        <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className='flex-1 p-4'>
+          <Welcome />
           <Categories />
+          <Tasks />
         </View>
       </ScrollView>
+      <AddTaskButton />
     </SafeAreaView>
   );
 }
