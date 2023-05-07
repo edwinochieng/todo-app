@@ -44,25 +44,28 @@ export default function NewTask() {
         </TouchableOpacity>
       </View>
 
-      <Modal visible={modalVisible}>
-        <Text>New Task</Text>
-        <View>
-          <View>
-            <Text>Title</Text>
+      <Modal visible={modalVisible} animationType='slide'>
+        <Text className='text-center font-semibold text-lg'>New Task</Text>
+        <View className='mt-4 p-4'>
+          <View className='py-2'>
+            <Text className='font-semibold text-gray-800 text-sm'>Title</Text>
             <TextInput
-              placeholder='enter title'
+              placeholder='Enter title'
               value={title}
               onChange={(text) => setTitle(text)}
+              className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
             />
           </View>
 
           <View>
-            <Text>Category</Text>
+            <Text className='font-semibold text-gray-800 text-sm'>
+              Category
+            </Text>
             <FlatList
               data={categories}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  className='rounded-lg px-2 py-4'
+                  className='bg-green-500 rounded-md px-2 py-1'
                   onPress={() => {
                     setActiveCategory(item);
                   }}
@@ -72,29 +75,33 @@ export default function NewTask() {
               )}
               keyExtractor={(item) => item.id}
               horizontal
+              className='my-1'
             />
           </View>
 
           <View>
-            <Text>Description</Text>
+            <Text className='font-semibold text-gray-800 text-sm py-1'>
+              Description
+            </Text>
             <TextInput
               multiline
               numberOfLines={4}
-              placeholder='enter description'
+              placeholder='Enter description'
               value={description}
               onChange={(text) => setDescription(text)}
+              className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
             />
           </View>
 
-          <View className='flex-row gap-3'>
+          <View className='flex-row mt-4'>
             <TouchableOpacity
               onPress={handleCancelPress}
-              className='border border-blue-100 bg-white px-4 px-3'
+              className='rounded border border-blue-100 bg-white px-6 py-3'
             >
               <Text className='text-blue-400'>Cancel</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity className='bg-blue-400 px-4 px-3'>
+            <TouchableOpacity className='rounded bg-blue-400 px-6 py-3'>
               <Text className='text-white'>Save</Text>
             </TouchableOpacity>
           </View>
