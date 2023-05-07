@@ -5,7 +5,7 @@ import Avatar from "../components/Avatar";
 import Categories from "../components/Categories";
 import Tasks from "../components/Tasks";
 import Welcome from "../components/Welcome";
-import AddTaskButton from "../components/AddTaskButton";
+import NewTask from "../components/NewTask";
 
 export default function Home() {
   return (
@@ -24,7 +24,7 @@ export default function Home() {
           <Tasks />
         </View>
       </ScrollView>
-      <AddTaskButton />
+      <NewTask />
     </SafeAreaView>
   );
 }
