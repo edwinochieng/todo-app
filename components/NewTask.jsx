@@ -11,9 +11,9 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const categories = [
-  { id: 0, title: "Personal" },
-  { id: 1, title: "Business" },
-  { id: 2, title: "School" },
+  { name: "Personal" },
+  { name: "Business" },
+  { name: "School" },
 ];
 
 const currentDate = new Date();
@@ -83,15 +83,21 @@ export default function NewTask() {
               data={categories}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  className='bg-green-500 rounded-md px-2 py-1'
+                  className='bg-gray-300 rounded p-2 w-[70px] mr-1'
                   onPress={() => {
                     setActiveCategory(item);
                   }}
                 >
-                  <Text className='text-sm font-normal'>{item.title}</Text>
+                  <Text
+                    className={`${
+                      activeCategory === item ? "text-blue-400" : "text-black"
+                    } text-sm font-normal`}
+                  >
+                    {item.name}
+                  </Text>
                 </TouchableOpacity>
               )}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.name}
               horizontal
               className='my-1'
             />
@@ -111,12 +117,12 @@ export default function NewTask() {
             />
           </View>
 
-          <View className='mt-4'>
-            <View>
+          <View className='mt-4 flex-row'>
+            <View className='w-1/2'>
               <Text>Date</Text>
               <TouchableOpacity
                 onPress={() => setShowDatePicker(true)}
-                className='bg-gray-200 px-1'
+                className='rounded-md bg-gray-200 px-1 py-4'
               >
                 <Text>{date.toLocaleDateString()}</Text>
               </TouchableOpacity>
@@ -130,36 +136,37 @@ export default function NewTask() {
               )}
             </View>
 
-            <View></View>
-            <Text>Time</Text>
-            <TouchableOpacity
-              onPress={() => setShowTimePicker(true)}
-              className='bg-gray-200 px-1'
-            >
-              <Text>{date.toLocaleTimeString()}</Text>
-            </TouchableOpacity>
-            {showTimePicker && (
-              <DateTimePicker
-                value={date}
-                mode='time'
-                display='default'
-                onChange={handleTimeChange}
-              />
-            )}
+            <View className='w-1/2'>
+              <Text>Time</Text>
+              <TouchableOpacity
+                onPress={() => setShowTimePicker(true)}
+                className='rounded-md bg-gray-200 px-1 py-4'
+              >
+                <Text>{date.toLocaleTimeString()}</Text>
+              </TouchableOpacity>
+              {showTimePicker && (
+                <DateTimePicker
+                  value={date}
+                  mode='time'
+                  display='default'
+                  onChange={handleTimeChange}
+                />
+              )}
+            </View>
           </View>
-        </View>
 
-        <View className='flex-row mt-4'>
-          <TouchableOpacity
-            onPress={handleCancelPress}
-            className='rounded border border-blue-100 bg-white px-6 py-3'
-          >
-            <Text className='text-blue-400'>Cancel</Text>
-          </TouchableOpacity>
+          <View className='flex-row mt-4'>
+            <TouchableOpacity
+              onPress={handleCancelPress}
+              className='w-1/2 rounded border border-blue-100 bg-white px-6 py-3 '
+            >
+              <Text className='text-blue-400'>Cancel</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity className='rounded bg-blue-400 px-6 py-3'>
-            <Text className='text-white'>Save</Text>
-          </TouchableOpacity>
+            <TouchableOpacity className='w-1/2 rounded bg-blue-400 px-6 py-3'>
+              <Text className='text-white'>Save</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     </View>
