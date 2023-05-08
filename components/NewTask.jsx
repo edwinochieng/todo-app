@@ -8,6 +8,7 @@ import {
   FlatList,
   Alert,
 } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const categories = [
   { id: 0, title: "Personal" },
@@ -15,11 +16,16 @@ const categories = [
   { id: 2, title: "School" },
 ];
 
+const currentDate = new Date();
+
 export default function NewTask() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [activeCategory, setActiveCategory] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
+  const [date, setDate] = useState(currentDate);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
 
   const handleCancelPress = () => {
     Alert.alert(
@@ -31,6 +37,18 @@ export default function NewTask() {
       ],
       { cancelable: false }
     );
+  };
+
+  const handleDateChange = (event, selectedDate) => {
+    const newDate = selectedDate || date;
+    setShowDatePicker(false);
+    setDate(newDate);
+  };
+
+  const handleTimeChange = (event, selectedTime) => {
+    const newDate = selectedTime || date;
+    setShowTimePicker(false);
+    setDate(newDate);
   };
 
   return (
@@ -93,18 +111,55 @@ export default function NewTask() {
             />
           </View>
 
-          <View className='flex-row mt-4'>
-            <TouchableOpacity
-              onPress={handleCancelPress}
-              className='rounded border border-blue-100 bg-white px-6 py-3'
-            >
-              <Text className='text-blue-400'>Cancel</Text>
-            </TouchableOpacity>
+          <View className='mt-4'>
+            <View>
+              <Text>Date</Text>
+              <TouchableOpacity
+                onPress={() => setShowDatePicker(true)}
+                className='bg-gray-200 px-1'
+              >
+                <Text>{date.toLocaleDateString()}</Text>
+              </TouchableOpacity>
+              {showDatePicker && (
+                <DateTimePicker
+                  value={date}
+                  mode='date'
+                  display='default'
+                  onChange={handleDateChange}
+                />
+              )}
+            </View>
 
-            <TouchableOpacity className='rounded bg-blue-400 px-6 py-3'>
-              <Text className='text-white'>Save</Text>
+            <View></View>
+            <Text>Time</Text>
+            <TouchableOpacity
+              onPress={() => setShowTimePicker(true)}
+              className='bg-gray-200 px-1'
+            >
+              <Text>{date.toLocaleTimeString()}</Text>
             </TouchableOpacity>
+            {showTimePicker && (
+              <DateTimePicker
+                value={date}
+                mode='time'
+                display='default'
+                onChange={handleTimeChange}
+              />
+            )}
           </View>
+        </View>
+
+        <View className='flex-row mt-4'>
+          <TouchableOpacity
+            onPress={handleCancelPress}
+            className='rounded border border-blue-100 bg-white px-6 py-3'
+          >
+            <Text className='text-blue-400'>Cancel</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity className='rounded bg-blue-400 px-6 py-3'>
+            <Text className='text-white'>Save</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </View>
