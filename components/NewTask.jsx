@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   TextInput,
@@ -26,6 +26,11 @@ export default function NewTask() {
   const [date, setDate] = useState(currentDate);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
+  const [showDatePlaceholder, setShowDatePlaceholder] = useState(true);
+
+  useEffect(() => {
+    setShowDatePlaceholder(true);
+  }, []);
 
   const handleCancelPress = () => {
     Alert.alert(
@@ -43,12 +48,14 @@ export default function NewTask() {
     const newDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(newDate);
+    setShowDatePlaceholder(false);
   };
 
   const handleTimeChange = (event, selectedTime) => {
     const newDate = selectedTime || date;
     setShowTimePicker(false);
     setDate(newDate);
+    setShowDatePlaceholder(false);
   };
 
   return (
@@ -117,14 +124,18 @@ export default function NewTask() {
             />
           </View>
 
-          <View className='mt-4 flex-row'>
-            <View className='w-1/2'>
+          <View className='mt-4 flex-row justify-between'>
+            <View className='w-2/5'>
               <Text>Date</Text>
               <TouchableOpacity
                 onPress={() => setShowDatePicker(true)}
                 className='rounded-md bg-gray-200 px-1 py-4'
               >
-                <Text>{date.toLocaleDateString()}</Text>
+                {showDatePlaceholder ? (
+                  <Text>dd/mm/yyy</Text>
+                ) : (
+                  <Text>{date.toLocaleDateString()}</Text>
+                )}
               </TouchableOpacity>
               {showDatePicker && (
                 <DateTimePicker
@@ -136,7 +147,7 @@ export default function NewTask() {
               )}
             </View>
 
-            <View className='w-1/2'>
+            <View className='w-5/12'>
               <Text>Time</Text>
               <TouchableOpacity
                 onPress={() => setShowTimePicker(true)}
@@ -155,15 +166,15 @@ export default function NewTask() {
             </View>
           </View>
 
-          <View className='flex-row mt-4'>
+          <View className='flex-row justify-between mt-4'>
             <TouchableOpacity
               onPress={handleCancelPress}
-              className='w-1/2 rounded border border-blue-100 bg-white px-6 py-3 '
+              className='w-5/12 rounded border border-blue-100 bg-white px-6 py-3 '
             >
               <Text className='text-blue-400'>Cancel</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity className='w-1/2 rounded bg-blue-400 px-6 py-3'>
+            <TouchableOpacity className='w-5/12 rounded bg-blue-400 px-6 py-3'>
               <Text className='text-white'>Save</Text>
             </TouchableOpacity>
           </View>
