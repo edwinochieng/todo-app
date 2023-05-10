@@ -5,11 +5,10 @@ import ToDo from "./ToDo";
 
 export default function Tasks() {
   const tasks = useStore((state) => state.tasks);
-  console.log(tasks);
 
   return (
     <View className=''>
-      <Text className='uppercase text-xs font-semibold text-gray-700'>
+      <Text className='uppercase text-xs font-semibold text-gray-700 mb-2'>
         Today's Tasks
       </Text>
       <FlatList
