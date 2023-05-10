@@ -9,6 +9,7 @@ import {
   Alert,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import useStore from "../store/store";
 
 const categories = [
   { name: "Personal" },
@@ -21,16 +22,14 @@ const currentDate = new Date();
 export default function NewTask() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [activeCategory, setActiveCategory] = useState({});
+  const [category, setCategory] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [date, setDate] = useState(currentDate);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [showDatePlaceholder, setShowDatePlaceholder] = useState(true);
 
-  useEffect(() => {
-    setShowDatePlaceholder(true);
-  }, []);
+  const addTask = useStore((state) => state.addTask);
 
   const handleCancelPress = () => {
     Alert.alert(
@@ -58,6 +57,18 @@ export default function NewTask() {
     setShowDatePlaceholder(false);
   };
 
+  const handleNewTask = () => {
+    const newTask = {
+      id: Math.floor(Math.random() * 10000),
+      title,
+      category,
+      description,
+      date: date.toLocaleDateString(),
+      time: date.toLocaleTimeString(),
+    };
+    addTask(newTask);
+  };
+
   return (
     <View>
       <View>
@@ -77,7 +88,7 @@ export default function NewTask() {
             <TextInput
               placeholder='Enter title'
               value={title}
-              onChange={(text) => setTitle(text)}
+              onChangeText={(text) => setTitle(text)}
               className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
             />
           </View>
@@ -92,12 +103,12 @@ export default function NewTask() {
                 <TouchableOpacity
                   className='bg-gray-300 rounded p-2 w-[70px] mr-1'
                   onPress={() => {
-                    setActiveCategory(item);
+                    setCategory(item.name);
                   }}
                 >
                   <Text
                     className={`${
-                      activeCategory === item ? "text-blue-400" : "text-black"
+                      category === item.name ? "text-blue-400" : "text-black"
                     } text-sm font-normal`}
                   >
                     {item.name}
@@ -119,7 +130,7 @@ export default function NewTask() {
               numberOfLines={4}
               placeholder='Enter description'
               value={description}
-              onChange={(text) => setDescription(text)}
+              onChangeText={(text) => setDescription(text)}
               className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
             />
           </View>
@@ -174,7 +185,10 @@ export default function NewTask() {
               <Text className='text-blue-400'>Cancel</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity className='w-5/12 rounded bg-blue-400 px-6 py-3'>
+            <TouchableOpacity
+              onPress={handleNewTask}
+              className='w-5/12 rounded bg-blue-400 px-6 py-3'
+            >
               <Text className='text-white'>Save</Text>
             </TouchableOpacity>
           </View>
