@@ -68,6 +68,7 @@ export default function NewTask() {
       isCompleted: false,
     };
     addTask(newTask);
+    setModalVisible(false);
   };
 
   return (
