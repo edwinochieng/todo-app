@@ -17,13 +17,12 @@ export default function Home() {
           headerLeft: () => <Avatar />,
         }}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View className='flex-1 p-4'>
-          <Welcome />
-          <Categories />
-          <Tasks />
-        </View>
-      </ScrollView>
+
+      <View className='flex-1 p-4'>
+        <Welcome />
+        <Categories />
+        <Tasks />
+      </View>
       <NewTask />
     </SafeAreaView>
   );
