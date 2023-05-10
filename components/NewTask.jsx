@@ -65,6 +65,7 @@ export default function NewTask() {
       description,
       date: date.toLocaleDateString(),
       time: date.toLocaleTimeString(),
+      isCompleted: false,
     };
     addTask(newTask);
   };
