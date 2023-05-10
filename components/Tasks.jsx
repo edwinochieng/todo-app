@@ -16,8 +16,6 @@ export default function Tasks() {
         data={tasks}
         renderItem={({ item }) => <ToDo title={item.title} />}
         keyExtractor={(item) => item.id}
-        horizontal
-        showsVerticalScrollIndicator={false}
       />
     </View>
   );
