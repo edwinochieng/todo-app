@@ -13,7 +13,7 @@ export default function Tasks() {
       </Text>
       <FlatList
         data={tasks}
-        renderItem={({ item }) => <ToDo title={item.title} />}
+        renderItem={({ item }) => <ToDo id={item.id} title={item.title} />}
         keyExtractor={(item) => item.id}
       />
     </View>
