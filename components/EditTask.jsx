@@ -11,6 +11,8 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import useStore from "../store/store";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useRouter } from "expo-router";
 
 const categories = [
   { name: "Personal" },
@@ -28,7 +30,9 @@ export default function EditTask({ id, title, category, description, date }) {
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [showDatePlaceholder, setShowDatePlaceholder] = useState(true);
 
+  const router = useRouter();
   const updateTask = useStore((state) => state.updateTask);
+  const deleteTask = useStore((state) => state.removeTask);
 
   const handleCancelPress = () => {
     Alert.alert(
@@ -37,6 +41,24 @@ export default function EditTask({ id, title, category, description, date }) {
       [
         { text: "NO", style: "cancel" },
         { text: "YES", onPress: () => setModalVisible(false) },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const handleDeletePress = () => {
+    Alert.alert(
+      "Are you sure you want to delete?",
+      "This will permanently remove this task.",
+      [
+        { text: "NO", style: "cancel" },
+        {
+          text: "YES",
+          onPress: () => {
+            router.push("/");
+            deleteTask(id);
+          },
+        },
       ],
       { cancelable: false }
     );
@@ -76,7 +98,10 @@ export default function EditTask({ id, title, category, description, date }) {
           <FontAwesome name='edit' size={24} color='black' />
         </TouchableOpacity>
 
-        <TouchableOpacity className='bg-gray-300 p-2 rounded-md ml-1'>
+        <TouchableOpacity
+          onPress={handleDeletePress}
+          className='bg-gray-300 p-2 rounded-md ml-1'
+        >
           <AntDesign name='delete' size={20} color='black' />
         </TouchableOpacity>
       </View>
@@ -150,7 +175,7 @@ export default function EditTask({ id, title, category, description, date }) {
               </TouchableOpacity>
               {showDatePicker && (
                 <DateTimePicker
-                  value={date}
+                  value={newDate}
                   mode='date'
                   display='default'
                   onChange={handleDateChange}
@@ -168,7 +193,7 @@ export default function EditTask({ id, title, category, description, date }) {
               </TouchableOpacity>
               {showTimePicker && (
                 <DateTimePicker
-                  value={date}
+                  value={newDate}
                   mode='time'
                   display='default'
                   onChange={handleTimeChange}

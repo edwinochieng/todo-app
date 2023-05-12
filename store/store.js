@@ -22,8 +22,8 @@ const useStore = create((set, get) => ({
     });
   },
 
-  removeTask: (task) => {
-    set({ tasks: get().tasks.filter((item) => item.id !== task.id) });
+  removeTask: (taskId) => {
+    set({ tasks: get().tasks.filter((item) => item.id !== taskId) });
   },
   clearStore: () => {
     set({ tasks: [] });
