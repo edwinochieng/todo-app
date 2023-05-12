@@ -9,6 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useSearchParams, useRouter } from "expo-router";
 import useStore from "../../store/store";
+import EditTask from "../../components/EditTask";
 
 export default function TaskDetails() {
   const router = useRouter();
@@ -17,7 +18,6 @@ export default function TaskDetails() {
   const tasks = useStore((state) => state.tasks);
 
   const task = tasks.find((item) => item.id == params.id);
-  console.log(task);
 
   return (
     <SafeAreaView>
@@ -26,15 +26,62 @@ export default function TaskDetails() {
           headerShadowVisible: false,
           headerTitle: "",
           headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()}>
-              <Ionicons name='chevron-back-sharp' size={24} color='black' />
+            <TouchableOpacity
+              onPress={() => router.back()}
+              className='rounded-lg p-2 bg-gray-200 items-center'
+            >
+              <Ionicons name='chevron-back-sharp' size={20} color='black' />
             </TouchableOpacity>
           ),
         }}
       />
       <ScrollView>
-        <Text>{params.id}</Text>
+        <View className='flex-1 p-4'>
+          <View>
+            <Text className='font-bold text-xl text-gray-800'>
+              {task.title}
+            </Text>
+          </View>
+
+          <View className='py-2'>
+            <Text className='font-semibold'>Category</Text>
+            <Text className='mt-1 p-2 bg-gray-200 rounded-md text-blue-400'>
+              {task.category}
+            </Text>
+          </View>
+
+          <View className='py-2'>
+            <Text className='font-semibold'>Status</Text>
+
+            <View className='mt-1 bg-gray-200 p-2 rounded-md font-semibold'>
+              {task.isCompleted ? (
+                <Text className='bg-green-400'>Completed</Text>
+              ) : (
+                <Text className=' text-gray-600'>Pending</Text>
+              )}
+            </View>
+          </View>
+
+          <View className='py-2'>
+            <Text className='font-semibold mb-1'>Description</Text>
+            <Text className='bg-gray-200 p-2 rounded-md text-sm text-gray-700'>
+              {task.description}
+            </Text>
+          </View>
+          <View className='py-2 flex-row justify-between'>
+            <View className='w-2/5'>
+              <Text className='mb-1 font-semibold'>Date</Text>
+              <Text className='rounded bg-gray-200 px-2 py-4'>{task.date}</Text>
+            </View>
+
+            <View className='w-2/5'>
+              <Text className='mb-1 font-semibold'>Time</Text>
+              <Text className='rounded bg-gray-200 px-2 py-4'>{task.time}</Text>
+            </View>
+          </View>
+        </View>
       </ScrollView>
+      <EditTask />
     </SafeAreaView>
   );
 }
