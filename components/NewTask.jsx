@@ -37,7 +37,17 @@ export default function NewTask() {
       "Are you sure you want to cancel?",
       [
         { text: "NO", style: "cancel" },
-        { text: "YES", onPress: () => setModalVisible(false) },
+        {
+          text: "YES",
+          onPress: () => {
+            setModalVisible(false);
+            setTitle("");
+            setCategory("");
+            setDescription("");
+            setDate(currentDate);
+            setShowDatePlaceholder(true);
+          },
+        },
       ],
       { cancelable: false }
     );
