@@ -18,15 +18,17 @@ const categories = [
   { name: "School" },
 ];
 
-export default function EditTask({ title, category, description }) {
+export default function EditTask({ id, title, category, description, date }) {
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
   const [newCategory, setNewCategory] = useState(category);
-  const [date, setDate] = useState(new Date());
+  const [newDate, setNewDate] = useState(date);
   const [modalVisible, setModalVisible] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [showDatePlaceholder, setShowDatePlaceholder] = useState(true);
+
+  const updateTask = useStore((state) => state.updateTask);
 
   const handleCancelPress = () => {
     Alert.alert(
@@ -41,28 +43,27 @@ export default function EditTask({ title, category, description }) {
   };
 
   const handleDateChange = (event, selectedDate) => {
-    const newDate = selectedDate || date;
+    const pickedDate = selectedDate || newDate;
     setShowDatePicker(false);
-    setDate(newDate);
+    setDate(pickedDate);
     setShowDatePlaceholder(false);
   };
 
   const handleTimeChange = (event, selectedTime) => {
-    const newDate = selectedTime || date;
+    const pickedDate = selectedTime || newDate;
     setShowTimePicker(false);
-    setDate(newDate);
+    setDate(pickedDate);
     setShowDatePlaceholder(false);
   };
 
-  const handleNewTask = () => {
-    const newTask = {
-      newTitle,
-      newCategory,
-      newDescription,
-      date: date.toLocaleDateString(),
-      time: date.toLocaleTimeString(),
+  const handleEditTask = () => {
+    const editedTask = {
+      title: newTitle,
+      category: newCategory,
+      description: newDescription,
+      date: newDate,
     };
-
+    updateTask(editedTask, id);
     setModalVisible(false);
   };
   return (
@@ -144,7 +145,7 @@ export default function EditTask({ title, category, description }) {
                 {showDatePlaceholder ? (
                   <Text>dd/mm/yyy</Text>
                 ) : (
-                  <Text>{date.toLocaleDateString()}</Text>
+                  <Text>{newDate.toLocaleDateString()}</Text>
                 )}
               </TouchableOpacity>
               {showDatePicker && (
@@ -163,7 +164,7 @@ export default function EditTask({ title, category, description }) {
                 onPress={() => setShowTimePicker(true)}
                 className='rounded-md bg-gray-200 px-1 py-4'
               >
-                <Text>{date.toLocaleTimeString()}</Text>
+                <Text>{newDate.toLocaleTimeString()}</Text>
               </TouchableOpacity>
               {showTimePicker && (
                 <DateTimePicker
@@ -185,7 +186,7 @@ export default function EditTask({ title, category, description }) {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={handleNewTask}
+              onPress={handleEditTask}
               className='w-5/12 rounded bg-blue-400 px-6 py-3'
             >
               <Text className='text-white'>Save</Text>
