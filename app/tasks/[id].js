@@ -71,12 +71,16 @@ export default function TaskDetails() {
           <View className='py-2 flex-row justify-between'>
             <View className='w-2/5'>
               <Text className='mb-1 font-semibold'>Date</Text>
-              <Text className='rounded bg-gray-200 px-2 py-4'>{task.date}</Text>
+              <Text className='rounded bg-gray-200 px-2 py-4'>
+                {task.date.toLocaleDateString()}
+              </Text>
             </View>
 
             <View className='w-2/5'>
               <Text className='mb-1 font-semibold'>Time</Text>
-              <Text className='rounded bg-gray-200 px-2 py-4'>{task.time}</Text>
+              <Text className='rounded bg-gray-200 px-2 py-4'>
+                {task.date.toLocaleTimeString()}
+              </Text>
             </View>
           </View>
         </View>
@@ -85,6 +89,7 @@ export default function TaskDetails() {
         title={task.title}
         description={task.description}
         category={task.category}
+        date={task.date}
       />
     </SafeAreaView>
   );

@@ -63,8 +63,7 @@ export default function NewTask() {
       title,
       category,
       description,
-      date: date.toLocaleDateString(),
-      time: date.toLocaleTimeString(),
+      date,
       isCompleted: false,
     };
     addTask(newTask);
