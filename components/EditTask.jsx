@@ -189,7 +189,12 @@ export default function EditTask({ id, title, category, description, date }) {
                 onPress={() => setShowTimePicker(true)}
                 className='rounded-md bg-gray-200 px-1 py-4'
               >
-                <Text>{newDate.toLocaleTimeString()}</Text>
+                <Text>
+                  {newDate.toLocaleTimeString({
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Text>
               </TouchableOpacity>
               {showTimePicker && (
                 <DateTimePicker
