@@ -81,7 +81,11 @@ export default function TaskDetails() {
           </View>
         </View>
       </ScrollView>
-      <EditTask />
+      <EditTask
+        title={task.title}
+        description={task.description}
+        category={task.category}
+      />
     </SafeAreaView>
   );
 }
