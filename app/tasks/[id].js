@@ -79,7 +79,10 @@ export default function TaskDetails() {
             <View className='w-2/5'>
               <Text className='mb-1 font-semibold'>Time</Text>
               <Text className='rounded bg-gray-200 px-2 py-4'>
-                {task.date.toLocaleTimeString()}
+                {task.date.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </Text>
             </View>
           </View>
