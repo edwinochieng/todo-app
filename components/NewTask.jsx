@@ -68,6 +68,10 @@ export default function NewTask() {
     };
     addTask(newTask);
     setModalVisible(false);
+    setCategory("");
+    setDescription("");
+    setTitle("");
+    setShowDatePlaceholder(true);
   };
 
   return (
