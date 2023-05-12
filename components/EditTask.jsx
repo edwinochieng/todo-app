@@ -18,17 +18,15 @@ const categories = [
   { name: "School" },
 ];
 
-export default function EditTask() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+export default function EditTask({ title, category, description }) {
+  const [newTitle, setNewTitle] = useState(title);
+  const [newDescription, setNewDescription] = useState(description);
+  const [newCategory, setNewCategory] = useState(category);
   const [date, setDate] = useState(new Date());
+  const [modalVisible, setModalVisible] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [showDatePlaceholder, setShowDatePlaceholder] = useState(true);
-
-  const addTask = useStore((state) => state.addTask);
 
   const handleCancelPress = () => {
     Alert.alert(
@@ -58,15 +56,13 @@ export default function EditTask() {
 
   const handleNewTask = () => {
     const newTask = {
-      id: Math.floor(Math.random() * 10000),
-      title,
-      category,
-      description,
+      newTitle,
+      newCategory,
+      newDescription,
       date: date.toLocaleDateString(),
       time: date.toLocaleTimeString(),
-      isCompleted: false,
     };
-    addTask(newTask);
+
     setModalVisible(false);
   };
   return (
@@ -90,8 +86,8 @@ export default function EditTask() {
             <Text className='font-semibold text-gray-800 text-sm'>Title</Text>
             <TextInput
               placeholder='Enter title'
-              value={title}
-              onChangeText={(text) => setTitle(text)}
+              value={newTitle}
+              onChangeText={(text) => setNewTitle(text)}
               className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
             />
           </View>
@@ -106,12 +102,12 @@ export default function EditTask() {
                 <TouchableOpacity
                   className='bg-gray-300 rounded p-2 w-[70px] mr-1'
                   onPress={() => {
-                    setCategory(item.name);
+                    setNewCategory(item.name);
                   }}
                 >
                   <Text
                     className={`${
-                      category === item.name ? "text-blue-400" : "text-black"
+                      newCategory === item.name ? "text-blue-400" : "text-black"
                     } text-sm font-normal`}
                   >
                     {item.name}
@@ -132,8 +128,8 @@ export default function EditTask() {
               multiline
               numberOfLines={4}
               placeholder='Enter description'
-              value={description}
-              onChangeText={(text) => setDescription(text)}
+              value={newDescription}
+              onChangeText={(text) => setNewDescription(text)}
               className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
             />
           </View>
