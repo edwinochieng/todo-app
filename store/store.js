@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+export const categories = [
+  { name: "Personal" },
+  { name: "Business" },
+  { name: "School" },
+];
+
 const useStore = create((set, get) => ({
   tasks: [],
 
