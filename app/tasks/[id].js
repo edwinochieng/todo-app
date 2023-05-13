@@ -94,6 +94,7 @@ export default function TaskDetails() {
         description={task.description}
         category={task.category}
         date={task.date}
+        isCompleted={task.isCompleted}
       />
     </SafeAreaView>
   );

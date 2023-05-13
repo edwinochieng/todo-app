@@ -20,7 +20,14 @@ const categories = [
   { name: "School" },
 ];
 
-export default function EditTask({ id, title, category, description, date }) {
+export default function EditTask({
+  id,
+  title,
+  category,
+  description,
+  date,
+  isCompleted,
+}) {
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
   const [newCategory, setNewCategory] = useState(category);
@@ -91,12 +98,14 @@ export default function EditTask({ id, title, category, description, date }) {
   return (
     <View>
       <View className='absolute right-4 flex-row'>
-        <TouchableOpacity
-          onPress={() => setModalVisible(true)}
-          className='bg-gray-300 p-2 rounded-md mr-1'
-        >
-          <FontAwesome name='edit' size={24} color='black' />
-        </TouchableOpacity>
+        {!isCompleted && (
+          <TouchableOpacity
+            onPress={() => setModalVisible(true)}
+            className='bg-gray-300 p-2 rounded-md mr-1'
+          >
+            <FontAwesome name='edit' size={24} color='black' />
+          </TouchableOpacity>
+        )}
 
         <TouchableOpacity
           onPress={handleDeletePress}
