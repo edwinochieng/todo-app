@@ -11,9 +11,7 @@ export default function Categories() {
       </Text>
       <FlatList
         data={categories}
-        renderItem={({ item }) => (
-          <CategoryCard title={item.name} tasks={item.tasks} />
-        )}
+        renderItem={({ item }) => <CategoryCard title={item.name} />}
         keyExtractor={(item) => item.name}
         horizontal
         showsHorizontalScrollIndicator={false}
