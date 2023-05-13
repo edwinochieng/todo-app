@@ -13,12 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 import useStore from "../store/store";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useRouter } from "expo-router";
-
-const categories = [
-  { name: "Personal" },
-  { name: "Business" },
-  { name: "School" },
-];
+import { categories } from "../store/store";
 
 export default function EditTask({
   id,

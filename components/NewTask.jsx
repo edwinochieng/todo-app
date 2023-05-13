@@ -10,12 +10,7 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import useStore from "../store/store";
-
-const categories = [
-  { name: "Personal" },
-  { name: "Business" },
-  { name: "School" },
-];
+import { categories } from "../store/store";
 
 const currentDate = new Date();
 

@@ -1,12 +1,7 @@
 import React from "react";
 import { FlatList, ScrollView, Text, View } from "react-native";
 import CategoryCard from "./CategoryCard";
-
-const categories = [
-  { id: 0, title: "Personal", tasks: 20 },
-  { id: 1, title: "Business", tasks: 7 },
-  { id: 2, title: "School", tasks: 10 },
-];
+import { categories } from "../store/store";
 
 export default function Categories() {
   return (
@@ -17,9 +12,9 @@ export default function Categories() {
       <FlatList
         data={categories}
         renderItem={({ item }) => (
-          <CategoryCard title={item.title} tasks={item.tasks} />
+          <CategoryCard title={item.name} tasks={item.tasks} />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.name}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
