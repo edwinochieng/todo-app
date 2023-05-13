@@ -55,7 +55,7 @@ export default function TaskDetails() {
 
             <View className='mt-1 bg-gray-200 p-2 rounded-md font-semibold'>
               {task.isCompleted ? (
-                <Text className='bg-green-400'>Completed</Text>
+                <Text className='text-green-600'>Completed</Text>
               ) : (
                 <Text className=' text-gray-600'>Pending</Text>
               )}

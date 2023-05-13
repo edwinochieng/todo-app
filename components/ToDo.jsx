@@ -2,17 +2,28 @@ import react, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import useStore from "../store/store";
 
 export default function ToDo({ id, title }) {
   const [isDone, setIsDone] = useState(false);
 
   const router = useRouter();
 
+  const updateTask = useStore((state) => state.updateTask);
+
+  const handleEditTask = () => {
+    const editedTask = {
+      isCompleted: !isDone,
+    };
+    updateTask(editedTask, id);
+    setIsDone(!isDone);
+  };
+
   return (
     <View className='bg-gray-800 rounded-lg py-4 mb-1 flex-row items-center'>
       <View className='mx-3'>
         <TouchableOpacity
-          onPress={() => setIsDone((prevValue) => !prevValue)}
+          onPress={handleEditTask}
           className='border rounded-full w-[24px] h-[24px] items-center justify-center'
         >
           {isDone && <Ionicons name='checkmark' size={18} color='black' />}
