@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Stack, useSearchParams, useRouter } from "expo-router";
+import { SafeAreaView, View, Text, ScrollView } from "react-native";
+import { Stack, useSearchParams } from "expo-router";
 import useStore from "../../store/store";
 import EditTask from "../../components/EditTask";
+import BackButton from "../../components/BackButton";
 
 export default function TaskDetails() {
-  const router = useRouter();
   const params = useSearchParams();
 
   const tasks = useStore((state) => state.tasks);
@@ -25,14 +18,7 @@ export default function TaskDetails() {
         options={{
           headerShadowVisible: false,
           headerTitle: "",
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => router.back()}
-              className='rounded-lg p-2 bg-gray-200 items-center'
-            >
-              <Ionicons name='chevron-back-sharp' size={20} color='black' />
-            </TouchableOpacity>
-          ),
+          headerLeft: () => <BackButton />,
         }}
       />
       <ScrollView>
