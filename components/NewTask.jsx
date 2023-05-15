@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   TextInput,
@@ -145,50 +145,57 @@ export default function NewTask() {
             />
           </View>
 
-          <View className='mt-4 flex-row justify-between'>
-            <View className='w-2/5'>
-              <Text>Date</Text>
-              <TouchableOpacity
-                onPress={() => setShowDatePicker(true)}
-                className='rounded-md bg-gray-200 px-1 py-4'
-              >
-                {showDatePlaceholder ? (
-                  <Text>dd/mm/yyy</Text>
-                ) : (
-                  <Text>{date.toLocaleDateString()}</Text>
+          <View className='mt-4 '>
+            <Text className='font-semibold text-gray-800 text-sm py-1'>
+              Date and Time
+            </Text>
+            <View className=' flex-row justify-between'>
+              <View className='w-2/5'>
+                <TouchableOpacity
+                  onPress={() => setShowDatePicker(true)}
+                  className='rounded-md bg-gray-200 px-1 py-4'
+                >
+                  {showDatePlaceholder ? (
+                    <Text>Date</Text>
+                  ) : (
+                    <Text>{date.toLocaleDateString()}</Text>
+                  )}
+                </TouchableOpacity>
+                {showDatePicker && (
+                  <DateTimePicker
+                    value={date}
+                    mode='date'
+                    display='default'
+                    onChange={handleDateChange}
+                  />
                 )}
-              </TouchableOpacity>
-              {showDatePicker && (
-                <DateTimePicker
-                  value={date}
-                  mode='date'
-                  display='default'
-                  onChange={handleDateChange}
-                />
-              )}
-            </View>
+              </View>
 
-            <View className='w-5/12'>
-              <Text>Time</Text>
-              <TouchableOpacity
-                onPress={() => setShowTimePicker(true)}
-                className='rounded-md bg-gray-200 px-1 py-4'
-              >
-                <Text>
-                  {date.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </Text>
-              </TouchableOpacity>
-              {showTimePicker && (
-                <DateTimePicker
-                  value={date}
-                  mode='time'
-                  display='default'
-                  onChange={handleTimeChange}
-                />
-              )}
+              <View className='w-5/12'>
+                <TouchableOpacity
+                  onPress={() => setShowTimePicker(true)}
+                  className='rounded-md bg-gray-200 px-1 py-4'
+                >
+                  {showDatePlaceholder ? (
+                    <Text>Time</Text>
+                  ) : (
+                    <Text>
+                      {date.toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </Text>
+                  )}
+                </TouchableOpacity>
+                {showTimePicker && (
+                  <DateTimePicker
+                    value={date}
+                    mode='time'
+                    display='default'
+                    onChange={handleTimeChange}
+                  />
+                )}
+              </View>
             </View>
           </View>
 

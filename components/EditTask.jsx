@@ -42,7 +42,17 @@ export default function EditTask({
       "Are you sure you want to cancel?",
       [
         { text: "NO", style: "cancel" },
-        { text: "YES", onPress: () => setModalVisible(false) },
+        {
+          text: "YES",
+          onPress: () => {
+            setModalVisible(false);
+            setNewTitle(title);
+            setNewCategory(category);
+            setNewDescription(description);
+            setNewDate(date);
+            setShowDatePlaceholder(true);
+          },
+        },
       ],
       { cancelable: false }
     );
@@ -89,6 +99,10 @@ export default function EditTask({
     };
     updateTask(editedTask, id);
     setModalVisible(false);
+    setNewCategory(category);
+    setNewDescription(description);
+    setNewTitle(title);
+    setShowDatePlaceholder(true);
   };
   return (
     <View>
@@ -164,50 +178,57 @@ export default function EditTask({
             />
           </View>
 
-          <View className='mt-4 flex-row justify-between'>
-            <View className='w-2/5'>
-              <Text>Date</Text>
-              <TouchableOpacity
-                onPress={() => setShowDatePicker(true)}
-                className='rounded-md bg-gray-200 px-1 py-4'
-              >
-                {showDatePlaceholder ? (
-                  <Text>dd/mm/yyy</Text>
-                ) : (
-                  <Text>{newDate.toLocaleDateString()}</Text>
+          <View className='mt-4 '>
+            <Text className='font-semibold text-gray-800 text-sm py-1'>
+              Date and Time
+            </Text>
+            <View className='flex-row justify-between'>
+              <View className='w-2/5'>
+                <TouchableOpacity
+                  onPress={() => setShowDatePicker(true)}
+                  className='rounded-md bg-gray-200 px-1 py-4'
+                >
+                  {showDatePlaceholder ? (
+                    <Text>Date</Text>
+                  ) : (
+                    <Text>{newDate.toLocaleDateString()}</Text>
+                  )}
+                </TouchableOpacity>
+                {showDatePicker && (
+                  <DateTimePicker
+                    value={newDate}
+                    mode='date'
+                    display='default'
+                    onChange={handleDateChange}
+                  />
                 )}
-              </TouchableOpacity>
-              {showDatePicker && (
-                <DateTimePicker
-                  value={newDate}
-                  mode='date'
-                  display='default'
-                  onChange={handleDateChange}
-                />
-              )}
-            </View>
+              </View>
 
-            <View className='w-5/12'>
-              <Text>Time</Text>
-              <TouchableOpacity
-                onPress={() => setShowTimePicker(true)}
-                className='rounded-md bg-gray-200 px-1 py-4'
-              >
-                <Text>
-                  {newDate.toLocaleTimeString({
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </Text>
-              </TouchableOpacity>
-              {showTimePicker && (
-                <DateTimePicker
-                  value={newDate}
-                  mode='time'
-                  display='default'
-                  onChange={handleTimeChange}
-                />
-              )}
+              <View className='w-5/12'>
+                <TouchableOpacity
+                  onPress={() => setShowTimePicker(true)}
+                  className='rounded-md bg-gray-200 px-1 py-4'
+                >
+                  {showDatePlaceholder ? (
+                    <Text>Time</Text>
+                  ) : (
+                    <Text>
+                      {newDate.toLocaleTimeString({
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </Text>
+                  )}
+                </TouchableOpacity>
+                {showTimePicker && (
+                  <DateTimePicker
+                    value={newDate}
+                    mode='time'
+                    display='default'
+                    onChange={handleTimeChange}
+                  />
+                )}
+              </View>
             </View>
           </View>
 
