@@ -1,9 +1,10 @@
 import { Stack } from "expo-router";
 import React from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, View, FlatList, Text } from "react-native";
 import useStore from "../../store/store";
 import { useSearchParams } from "expo-router";
 import BackButton from "../../components/BackButton";
+import ToDo from "../../components/ToDo";
 
 export default function Categories() {
   const tasks = useStore((state) => state.tasks);
@@ -21,6 +22,16 @@ export default function Categories() {
           headerLeft: () => <BackButton />,
         }}
       />
+      <View className='px-4'>
+        <Text className='text-lg font-bold text-center my-2'>
+          {category} Tasks
+        </Text>
+        <FlatList
+          data={foundTasks}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <ToDo id={item.id} title={item.title} />}
+        />
+      </View>
     </SafeAreaView>
   );
 }
