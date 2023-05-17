@@ -149,8 +149,8 @@ export default function NewTask() {
             <Text className='font-semibold text-gray-800 text-sm py-1'>
               Date and Time
             </Text>
-            <View className=' flex-row justify-between'>
-              <View className='w-2/5'>
+            <View className='flex flex-row space-x-3'>
+              <View className='flex-1'>
                 <TouchableOpacity
                   onPress={() => setShowDatePicker(true)}
                   className='rounded-md bg-gray-200 px-1 py-4'
@@ -171,7 +171,7 @@ export default function NewTask() {
                 )}
               </View>
 
-              <View className='w-5/12'>
+              <View className='flex-1'>
                 <TouchableOpacity
                   onPress={() => setShowTimePicker(true)}
                   className='rounded-md bg-gray-200 px-1 py-4'
@@ -199,17 +199,17 @@ export default function NewTask() {
             </View>
           </View>
 
-          <View className='flex-row justify-between mt-4'>
+          <View className='flex flex-row space-x-3 mt-4'>
             <TouchableOpacity
               onPress={handleCancelPress}
-              className='w-5/12 rounded border border-blue-100 bg-white px-6 py-3 '
+              className='flex-1 rounded border border-blue-100 bg-white px-6 py-3 '
             >
               <Text className='text-blue-400'>Cancel</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={handleNewTask}
-              className='w-5/12 rounded bg-blue-400 px-6 py-3'
+              className='flex-1 rounded bg-blue-400 px-6 py-3'
             >
               <Text className='text-white'>Save</Text>
             </TouchableOpacity>
