@@ -16,54 +16,61 @@ export default function TaskDetails() {
     <SafeAreaView>
       <Stack.Screen
         options={{
+          headerStyle: { backgroundColor: "#F4F6FD" },
           headerShadowVisible: false,
           headerTitle: "",
           headerLeft: () => <BackButton />,
         }}
       />
       <ScrollView>
-        <View className='flex-1 p-4'>
+        <View className='flex-1 p-4 h-screen bg-white'>
           <View>
-            <Text className='font-bold text-xl text-gray-800'>
+            <Text className='font-lato-bold font-bold text-xl text-gray-800'>
               {task.title}
             </Text>
           </View>
 
-          <View className='py-2'>
-            <Text className='font-semibold'>Category</Text>
-            <Text className='mt-1 p-2 bg-gray-200 rounded-md text-blue-400'>
+          <View className='py-3'>
+            <Text className='font-bold text-gray-700 font-lato'>Category</Text>
+            <Text className='mt-1 px-2 py-3 bg-gray-200 rounded-md text-blue-400'>
               {task.category}
             </Text>
           </View>
 
           <View className='py-2'>
-            <Text className='font-semibold'>Status</Text>
+            <Text className='font-bold text-gray-700 font-lato'>Status</Text>
 
-            <View className='mt-1 bg-gray-200 p-2 rounded-md font-semibold'>
+            <View className='mt-1 bg-gray-200 px-2 py-3 rounded-md font-semibold'>
               {task.isCompleted ? (
                 <Text className='text-green-600'>Completed</Text>
               ) : (
-                <Text className=' text-gray-600'>Pending</Text>
+                <Text className=' text-gray-700'>Pending</Text>
               )}
             </View>
           </View>
 
           <View className='py-2'>
-            <Text className='font-semibold mb-1'>Description</Text>
-            <Text className='bg-gray-200 p-2 rounded-md text-sm text-gray-700'>
+            <Text className='font-bold font-lato text-gray-700 mb-1'>
+              Description
+            </Text>
+            <Text className='bg-gray-200 px-2 py-3 rounded-md text-sm text-gray-700 font-lato'>
               {task.description}
             </Text>
           </View>
           <View className='py-2 flex-row justify-between'>
             <View className='w-2/5'>
-              <Text className='mb-1 font-semibold'>Date</Text>
+              <Text className='font-bold font-lato text-gray-700 mb-1'>
+                Date
+              </Text>
               <Text className='rounded bg-gray-200 px-2 py-4'>
                 {task.date.toLocaleDateString()}
               </Text>
             </View>
 
             <View className='w-2/5'>
-              <Text className='mb-1 font-semibold'>Time</Text>
+              <Text className='font-bold font-lato text-gray-700 mb-1'>
+                Time
+              </Text>
               <Text className='rounded bg-gray-200 px-2 py-4'>
                 {task.date.toLocaleTimeString([], {
                   hour: "2-digit",

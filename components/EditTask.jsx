@@ -106,146 +106,159 @@ export default function EditTask({
   };
   return (
     <View>
-      <View className='absolute right-4 flex-row'>
+      <View className='absolute bottom-5 right-4 flex-row'>
         {!isCompleted && (
           <TouchableOpacity
             onPress={() => setModalVisible(true)}
-            className='bg-gray-300 p-2 rounded-md mr-1'
+            className='bg-gray-300 p-2 rounded-md mr-2'
           >
-            <FontAwesome name='edit' size={24} color='black' />
+            <FontAwesome name='edit' size={22} color='black' />
           </TouchableOpacity>
         )}
 
         <TouchableOpacity
           onPress={handleDeletePress}
-          className='bg-gray-300 p-2 rounded-md ml-1'
+          className='bg-gray-300 p-2 rounded-md ml-2'
         >
           <AntDesign name='delete' size={20} color='black' />
         </TouchableOpacity>
       </View>
       <Modal visible={modalVisible} animationType='slide'>
-        <Text className='text-center font-semibold text-lg'>Edit Task</Text>
-        <View className='mt-4 p-4'>
-          <View className='py-2'>
-            <Text className='font-semibold text-gray-800 text-sm'>Title</Text>
-            <TextInput
-              placeholder='Enter title'
-              value={newTitle}
-              onChangeText={(text) => setNewTitle(text)}
-              className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
-            />
-          </View>
-
-          <View>
-            <Text className='font-semibold text-gray-800 text-sm'>
-              Category
+        <View className='bg-tertiary h-full  p-4 absolute bottom-0 left-0 right-0 '>
+          <View className='py-3 border border-x-transparent border-t-transparent border-b-lightGray'>
+            <Text className='text-center font-lato-bold font-bold text-xl'>
+              Edit Task
             </Text>
-            <FlatList
-              data={categories}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  className='bg-gray-300 rounded p-2 w-[70px] mr-1'
-                  onPress={() => {
-                    setNewCategory(item.name);
-                  }}
-                >
-                  <Text
-                    className={`${
-                      newCategory === item.name ? "text-blue-400" : "text-black"
-                    } text-sm font-normal`}
-                  >
-                    {item.name}
-                  </Text>
-                </TouchableOpacity>
-              )}
-              keyExtractor={(item) => item.name}
-              horizontal
-              className='my-1'
-            />
-          </View>
-
-          <View>
-            <Text className='font-semibold text-gray-800 text-sm py-1'>
-              Description
-            </Text>
-            <TextInput
-              multiline
-              numberOfLines={4}
-              placeholder='Enter description'
-              value={newDescription}
-              onChangeText={(text) => setNewDescription(text)}
-              className='rounded bg-gray-200 placeholder-gray-600 px-1 py-2'
-            />
           </View>
 
           <View className='mt-4 '>
-            <Text className='font-semibold text-gray-800 text-sm py-1'>
-              Date and Time
-            </Text>
-            <View className='flex flex-row space-x-3 justify-between'>
-              <View className='flex-1'>
-                <TouchableOpacity
-                  onPress={() => setShowDatePicker(true)}
-                  className='rounded-md bg-gray-200 px-1 py-4'
-                >
-                  {showDatePlaceholder ? (
-                    <Text>Date</Text>
-                  ) : (
-                    <Text>{newDate.toLocaleDateString()}</Text>
-                  )}
-                </TouchableOpacity>
-                {showDatePicker && (
-                  <DateTimePicker
-                    value={newDate}
-                    mode='date'
-                    display='default'
-                    onChange={handleDateChange}
-                  />
-                )}
-              </View>
+            <View className='py-2'>
+              <Text className='font-bold text-gray-800 text-sm font-lato mb-1'>
+                Title
+              </Text>
+              <TextInput
+                placeholder='Enter title'
+                value={newTitle}
+                onChangeText={(text) => setNewTitle(text)}
+                className='rounded bg-gray-200  text-gray-800 px-1 h-12'
+              />
+            </View>
 
-              <View className='flex-1'>
-                <TouchableOpacity
-                  onPress={() => setShowTimePicker(true)}
-                  className='rounded-md bg-gray-200 px-1 py-4'
-                >
-                  {showDatePlaceholder ? (
-                    <Text>Time</Text>
-                  ) : (
-                    <Text>
-                      {newDate.toLocaleTimeString({
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+            <View>
+              <Text className='font-lato font-bold text-gray-800 text-sm'>
+                Category
+              </Text>
+              <FlatList
+                data={categories}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    className='bg-gray-300 rounded p-2 w-[70px] mr-1'
+                    onPress={() => {
+                      setNewCategory(item.name);
+                    }}
+                  >
+                    <Text
+                      className={`${
+                        newCategory === item.name
+                          ? "text-blue-400"
+                          : "text-black"
+                      } text-sm font-normal`}
+                    >
+                      {item.name}
                     </Text>
-                  )}
-                </TouchableOpacity>
-                {showTimePicker && (
-                  <DateTimePicker
-                    value={newDate}
-                    mode='time'
-                    display='default'
-                    onChange={handleTimeChange}
-                  />
+                  </TouchableOpacity>
                 )}
+                keyExtractor={(item) => item.name}
+                horizontal
+                className='my-1'
+              />
+            </View>
+
+            <View>
+              <Text className='font-bold text-gray-800 text-sm font-lato my-1'>
+                Description
+              </Text>
+              <TextInput
+                multiline
+                numberOfLines={4}
+                placeholder='Enter description'
+                value={newDescription}
+                onChangeText={(text) => setNewDescription(text)}
+                className='rounded bg-gray-200  text-gray-800 px-1 h-20'
+              />
+            </View>
+
+            <View className='mt-4 '>
+              <Text className='font-bold text-gray-800 text-sm font-lato my-1'>
+                Date and Time
+              </Text>
+              <View className='flex flex-row space-x-3 justify-between'>
+                <View className='flex-1'>
+                  <TouchableOpacity
+                    onPress={() => setShowDatePicker(true)}
+                    className='rounded-md bg-gray-200 px-1 py-4'
+                  >
+                    {showDatePlaceholder ? (
+                      <Text className='text-gray-700 h-7'>Date</Text>
+                    ) : (
+                      <Text>{newDate.toLocaleDateString()}</Text>
+                    )}
+                  </TouchableOpacity>
+                  {showDatePicker && (
+                    <DateTimePicker
+                      value={newDate}
+                      mode='date'
+                      display='default'
+                      onChange={handleDateChange}
+                    />
+                  )}
+                </View>
+
+                <View className='flex-1'>
+                  <TouchableOpacity
+                    onPress={() => setShowTimePicker(true)}
+                    className='rounded-md bg-gray-200 px-1 py-4'
+                  >
+                    {showDatePlaceholder ? (
+                      <Text className='text-gray-700 h-7'>Time</Text>
+                    ) : (
+                      <Text>
+                        {newDate.toLocaleTimeString({
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </Text>
+                    )}
+                  </TouchableOpacity>
+                  {showTimePicker && (
+                    <DateTimePicker
+                      value={newDate}
+                      mode='time'
+                      display='default'
+                      onChange={handleTimeChange}
+                    />
+                  )}
+                </View>
               </View>
             </View>
-          </View>
 
-          <View className='flex flex-row space-x-3 mt-4'>
-            <TouchableOpacity
-              onPress={handleCancelPress}
-              className='flex-1 rounded border border-blue-100 bg-white px-6 py-3 '
-            >
-              <Text className='text-blue-400'>Cancel</Text>
-            </TouchableOpacity>
+            <View className='mt-12 flex flex-row space-x-3 font-lato '>
+              <TouchableOpacity
+                onPress={handleCancelPress}
+                className='flex-1 rounded-md border border-blue-500 bg-white h-12 justify-center '
+              >
+                <Text className='text-blue-500 text-lg text-center '>
+                  Cancel
+                </Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={handleEditTask}
-              className='flex-1 rounded bg-blue-400 px-6 py-3'
-            >
-              <Text className='text-white'>Save</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleEditTask}
+                className='flex-1 rounded-md bg-blue-500 h-12 justify-center'
+              >
+                <Text className='text-white text-lg text-center'>Save</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>

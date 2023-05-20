@@ -23,7 +23,7 @@ export default function Categories() {
         }}
       />
       <View className='px-4'>
-        <Text className='text-lg font-bold text-center my-2'>
+        <Text className='text-center font-lato-bold font-bold text-xl my-3'>
           {category} Tasks
         </Text>
         <FlatList
