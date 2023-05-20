@@ -12,7 +12,7 @@ export default function CategoryCard({ title }) {
   return (
     <View className='w-[220px] h-[135px] bg-secondary rounded-[26px] justify-center pl-4 my-3 mr-2'>
       <TouchableOpacity onPress={() => router.push(`categories/${title}`)}>
-        <Text className='text-sm text-gray font-lato font-bold'>
+        <Text className='text-sm text-gray-400 font-lato font-bold'>
           {foundTasksCount} tasks
         </Text>
         <Text className='text-2xl font-lato font-bold text-lightGray '>

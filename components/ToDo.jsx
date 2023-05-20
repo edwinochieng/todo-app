@@ -20,12 +20,12 @@ export default function ToDo({ id, title }) {
   };
 
   return (
-    <View className='bg-white   rounded-2xl min-h-[56px] py-5 mb-2 flex-row items-center shadow-lg'>
+    <View className='bg-white  rounded-2xl min-h-[56px] py-5 mb-2 flex-row items-center shadow-lg'>
       <View className='mx-3'>
         <TouchableOpacity
           onPress={handleEditTask}
           className={`${
-            isDone ? "bg-gray" : " border border-gray "
+            isDone ? "bg-gray-700" : " border border-gray-500 "
           } rounded-full w-[24px] h-[24px] items-center justify-center`}
         >
           {isDone && <Ionicons name='checkmark' size={18} color='white' />}
@@ -35,7 +35,7 @@ export default function ToDo({ id, title }) {
         <Text
           className={`${
             isDone ? "line-through" : "no-underline"
-          } text-base font-lato-bold font-semibold text-gray`}
+          } text-base font-lato font-semibold text-gray-700`}
         >
           {title}
         </Text>
