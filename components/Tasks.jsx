@@ -13,7 +13,7 @@ export default function Tasks() {
 
   return (
     <View className=''>
-      <Text className='uppercase text-xs font-semibold text-gray-700 mb-2'>
+      <Text className='uppercase text-[13px] font-lato-bold font-bold text-secondary mb-3'>
         Today's Tasks
       </Text>
       <FlatList

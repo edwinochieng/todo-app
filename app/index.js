@@ -9,16 +9,17 @@ import NewTask from "../components/NewTask";
 
 export default function Home() {
   return (
-    <SafeAreaView className='flex-1 bg-white'>
+    <SafeAreaView className='flex-1 bg-tertiary px-6'>
       <Stack.Screen
         options={{
+          headerStyle: { backgroundColor: "#F4F6FD" },
           headerShadowVisible: false,
           headerTitle: "",
           headerLeft: () => <Avatar />,
         }}
       />
 
-      <View className='flex-1 p-4'>
+      <View className='flex-1'>
         <Welcome />
         <Categories />
         <Tasks />

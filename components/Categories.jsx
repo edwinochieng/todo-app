@@ -5,8 +5,8 @@ import { categories } from "../store/store";
 
 export default function Categories() {
   return (
-    <View className='my-3'>
-      <Text className='uppercase text-xs font-semibold text-gray-700'>
+    <View className='mb-3'>
+      <Text className='uppercase text-[13px] font-lato-bold font-bold text-secondary'>
         Categories
       </Text>
       <FlatList

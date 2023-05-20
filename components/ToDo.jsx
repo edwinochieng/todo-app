@@ -20,28 +20,30 @@ export default function ToDo({ id, title }) {
   };
 
   return (
-    <View className='bg-gray-800 rounded-lg py-4 mb-1 flex-row items-center'>
+    <View className='bg-white   rounded-2xl min-h-[56px] py-5 mb-2 flex-row items-center shadow-lg'>
       <View className='mx-3'>
         <TouchableOpacity
           onPress={handleEditTask}
-          className='border rounded-full w-[24px] h-[24px] items-center justify-center'
+          className={`${
+            isDone ? "bg-gray" : " border border-gray "
+          } rounded-full w-[24px] h-[24px] items-center justify-center`}
         >
-          {isDone && <Ionicons name='checkmark' size={18} color='black' />}
+          {isDone && <Ionicons name='checkmark' size={18} color='white' />}
         </TouchableOpacity>
       </View>
       <View>
         <Text
           className={`${
             isDone ? "line-through" : "no-underline"
-          } text-base text-white`}
+          } text-base font-lato-bold font-semibold text-gray`}
         >
           {title}
         </Text>
       </View>
 
-      <View className='absolute right-0 mr-1'>
+      <View className='absolute right-0 mx-2'>
         <TouchableOpacity onPress={() => router.push(`tasks/${id}`)}>
-          <Ionicons name='chevron-forward-outline' size={28} color='black' />
+          <Ionicons name='chevron-forward-outline' size={24} color='#BBC2D8' />
         </TouchableOpacity>
       </View>
     </View>

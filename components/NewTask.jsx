@@ -11,6 +11,7 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import useStore from "../store/store";
 import { categories } from "../store/store";
+import { Ionicons } from "@expo/vector-icons";
 
 const currentDate = new Date();
 
@@ -84,9 +85,9 @@ export default function NewTask() {
       <View>
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
-          className='absolute right-4 bottom-6 rounded-full bg-blue-600 px-3 py-4 justify-center items-center'
+          className='z-50 absolute right-2 bottom-6 rounded-full bg-secondary h-[48px] w-[48px] justify-center items-center'
         >
-          <Text className='text-white '>New</Text>
+          <Ionicons name='add' size={24} color='white' />
         </TouchableOpacity>
       </View>
 
